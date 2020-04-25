@@ -3,7 +3,7 @@ while True:
     try:
         assert(int(n) > 0)
     except:
-        print("输入错误！请检查输入")
+        print("The type of you entered is error. Please cheak your enter.")
     else:
         n = int(n)
         def IsPrime(p):
