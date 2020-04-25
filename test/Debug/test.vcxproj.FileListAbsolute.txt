@@ -1,2 +1,0 @@
-C:\Users\王钰杰\source\c\test\Debug\test.exe
-C:\Users\王钰杰\source\c\test\Debug\test.pdb
