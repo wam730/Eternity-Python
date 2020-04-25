@@ -34,6 +34,6 @@ while True:
         print('\n排序后为：',selectSort(lst,how))
         x = (input('\n你还想继续吗？是请输入1，否请输入其他任意字符或回车：'))
         try:
-            assert(int(x) == 1)
+            assert(x == int(x))
         except:
             break
