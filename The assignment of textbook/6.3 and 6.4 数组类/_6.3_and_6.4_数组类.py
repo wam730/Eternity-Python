@@ -22,14 +22,18 @@ class myArray():
                 if not isinstance(i,int):
                     return 'You only can input int-number!'
             self.__myarray = arr.array('b',data)
+            return self.__myarray
        elif isinstance(data,range):
             self.__myarray = arr.array('b',data)
+            return self.__myarray
        else:
             return 'Your input is error!'
+
 
     def change(self,index,value):
         if index < len(self.__myarray)  and type(value) == int:
             self.__myarray[index] = value
+            return self.__myarray
         else:
             print("Error. Your input is illegal.")
 
@@ -58,35 +62,44 @@ class myArray():
             return 'Index error!'
 
     def show(self):
-        return self.__myarray
+        print(self.__myarray)
 
     def clearArray(self):
          self.__myarray = arr.array('b')
+         return self.__myarray
 
     def addValue(self,value):
         if type(value) == int:
             self.__myarray.append(value)
+            return self.__myarray
+        else:
+            return 'Your input is error!'
 
     def removeValue(self,value):
         if type(value) == int:
-            for i in self.__myarray:
-                if i == value:
-                    self.__myarray.remove(i)
+            if value in self.__myarray:
+                self.__myarray.remove(value)
+                return self.__myarray
+            else:
+                return '{0} is not in the array'.format(value)
         elif self.__myarray == arr.array('b'):
             return 'Array is empty!'
+        else:
+            return 'Your input is error!'
 
 x = myArray()
 x.setArray(range(11))
-print(x.show())
+x.show()
 
 x.change(10,90)
-print(x.show())
+x.show()
 
 print(x.returnValue([1,4,7,9,10]))
 
 x.addValue(91)
 x.removeValue(90)
-print(x.show())
+print(x.removeValue(1000))
+x.show()
 
 x.clearArray()
-print(x.show())
+x.show()
