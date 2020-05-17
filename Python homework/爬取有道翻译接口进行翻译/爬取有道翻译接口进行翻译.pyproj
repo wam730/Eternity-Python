@@ -2,15 +2,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>fd4ac21e-2445-4913-9c34-ca18c457ebe1</ProjectGuid>
+    <ProjectGuid>31ac984a-ddbc-4e4e-909e-3bb3d3148962</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Python期中作业.py</StartupFile>
+    <StartupFile>爬取有道翻译接口进行翻译.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Python期中作业</Name>
-    <RootNamespace>Python期中作业</RootNamespace>
+    <Name>爬取有道翻译接口进行翻译</Name>
+    <RootNamespace>爬取有道翻译接口进行翻译</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,9 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\Desktop\Python期中作业.py">
-      <Link>Python期中作业.py</Link>
-    </Compile>
+    <Compile Include="爬取有道翻译接口进行翻译.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
