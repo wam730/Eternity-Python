@@ -39,6 +39,7 @@ for a in soupMain.find_all('a',target='_blank'):
                 hyperlink = oxml.shared.OxmlElement('w:hyperlink')
                 hyperlink.set(oxml.shared.qn('r:id'),r_id)
                 hyperlink.append(p.runs[0]._r)
+                p._p.insert(1,hyperlink)
             except:
                 pass
         elif child.img:
