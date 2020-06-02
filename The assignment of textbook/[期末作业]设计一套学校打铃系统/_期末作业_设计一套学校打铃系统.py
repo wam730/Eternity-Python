@@ -11,8 +11,10 @@ import datetime
 import re
 import tkinter.messagebox
 import os
+import sys
 import tkinter as tk
 import threading
+import myStop
 from mutagen.mp3 import MP3 
 from tkinter import filedialog
 #预设函数、类———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,18 +99,29 @@ class Audio():
         beginAudio = MP3(filepath)
         pygame.mixer.init()
         pygame.mixer.music.load(filepath)
-        pygame.mixer.music.play(0)
-        time.sleep(beginAudio.info.length)
-        pygame.mixer.music.stop()
+        x  = beginAudio.info.length
+        if x < 60.0:
+            pygame.mixer.music.play(0)
+            time.sleep(61.0)
+            pygame.mixer.music.stop()
+        else:
+            pygame.mixer.music.play(0)
+            time.sleep(beginAudio.info.length)
+            pygame.mixer.music.stop()
 
     def classoverAudio():
         filepath = Audio.chooseoverAudio()
         overAudio = MP3(filepath)
         pygame.mixer.init()
         pygame.mixer.music.load(filepath)
-        pygame.mixer.music.play(0)
-        time.sleep(overAudio.info.length)
-        pygame.mixer.music.stop() 
+        if x < 60.0:
+            pygame.mixer.music.play(0)
+            time.sleep(61.0)
+            pygame.mixer.music.stop()
+        else:
+            pygame.mixer.music.play(0)
+            time.sleep(overAudio.info.length)
+            pygame.mixer.music.stop()
 
     def otherAudio():
         filepath = Audio.chooseotherAudio()
@@ -118,36 +131,56 @@ class Audio():
         pygame.mixer.music.play(0)
         time.sleep(overAudio.info.length)
         pygame.mixer.music.stop() 
-#开始响铃函数
+#用于显示消息，点击“开始”后提示用户程序已经开始运行
+def before_start():
+    with open('Begin.txt','r') as f:
+        x = f.read()
+    if x != '':
+        showBeginTime.insert('end','开始工作\n上课铃响铃时间为：{0}\n'.format(x))
+        start()
+    else:
+        tk.messagebox.showwarning(title = '时间不正确', message = '你可能还未设置响铃时间\n请在下方输入框中输入时间\n\设置完成后请在“开始/停止/暂停”中点击“开始”')
+#响铃函数，使程序在规定时间响铃
 def start():
     with open('Begin.txt','r') as f:
         x = f.read()
-        x = x.split(' ')
-        print(x,type(x))
-        if x != '':
-            showBeginTime.insert('end','开始工作\t上课铃响铃时间为：{0}\n'.format(x))
-            for t in x:
-                if (gettime())[0]+':'+(gettime())[1] in x:
-                    Audio.classbeginAudio
-        else:
-            tk.messagebox.showwarning(title = '时间不正确', message = '你可能还未设置响铃时间\n请在下方输入框中输入时间')
+    x = x.split(' ')
+    print('现在是（测试）',(gettime())[0]+':'+(gettime())[1])
+    for t in x:
+        if (gettime())[0]+':'+(gettime())[1] in x:
+            print("Work")
+            Audio.classbeginAudio()
     global timer
     timer = threading.Timer(1,start)
     timer.start()
 #结束程序函数
 def end():
-    print('Not designed.')
-#更新时间显示函数
+    x = tkinter.messagebox.askquestion('提示', '确认退出吗？')
+    if x == 'yes':
+        #myStop.stop_thread(timer)
+        root.destroy()
+        os._exit(0)
+        print('Stop')
+    else:
+        pass
+#暂停程序函数
+def pause():
+    x = tkinter.messagebox.askquestion('提示', '确认暂停吗？')
+    if x == 'yes':
+        print('Pause')
+        myStop.stop_thread(timer)
+        tk.messagebox.showinfo(title = '程序已暂停',message = '程序已经暂停运行\n再次点击“开始”以运行程序')
+#更新系统时间显示函数
 def update_time():
     clock_label.configure(text=time.strftime('现在是：%Y-%m-%d %H:%M:%S',time.localtime()))
     clock_label.after(1000,update_time)
-#获取时间
+#获取当前系统时间函数
 def gettime():
     Hour = time.strftime('%H')
     Min = time.strftime('%M')
-    global timer
-    timer = threading.Timer(1,gettime)
-    timer.start()
+    global timers
+    timers = threading.Timer(1,gettime)
+    timers.start()
     return Hour,Min
 #判断输入框输入上课铃时间是否正确函数
 def judgebeginTime():
@@ -179,10 +212,11 @@ def getBeginTime():
 #将输入框输入下课铃时间写入文件与显示框
 def getoverTime():
     global OverTime
-    BeginTime = inputOverTime.get()
+    OverTime = inputOverTime.get()
     if judgeoverTime():
-        showOverTime.insert('end','上课铃响铃时间为：{0}\n'.format(OverTime))
-        overTimelist = list(OverTime)
+        showOverTime.insert('end','下课铃响铃时间为：{0}\n'.format(OverTime))
+        with open('over.txt',"w+") as f:
+            f.writelines(OverTime)
     return OverTime
 #说明：如何设置时间函数
 def howtosetTime():
@@ -207,8 +241,8 @@ def howtosetAudio():
 def howtouse():
     window3 = tk.Tk()
     window3.title('如何使用程序')
-    Text = tk.Label(window3,text = '使用步骤\n1、设置上下课响铃时间\n2、设置上下课响铃音乐\n3、设置完毕后在菜单栏的“开始\停止”中\
-    选择“开始运行”\n4、严格遵循响铃设置，开始自律的（网课）生活吧！',font=1)
+    Text = tk.Label(window3,text = '使用步骤\n1、设置上下课响铃时间\n2、设置上下课响铃音乐\n3、设置完毕后在菜单栏的“开始/停止/暂停”中\
+    选择“开始”\n4、严格遵循响铃设置，开始自律的（网课）生活吧！',font=1)
     Text.pack()
     window3.mainloop()
 #说明：关于作者函数
@@ -224,8 +258,10 @@ def aboutAuthor():
 #选择当前方案作为响铃方案函数
 def commonProgramme():
     print('Not designed.')
+    print('Not designed.')
 #选择高考响铃方案作为方案函数
 def examProgramme():
+    print('Not designed.')
     print('Not designed.')
 #主程序————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 root = tk.Tk()
@@ -251,16 +287,15 @@ selectmenu.add_cascade(label = '当前方案',command = commonProgramme)
 selectmenu.add_cascade(label = '高考响铃方案',command = examProgramme)
 '开始/停止'
 startendmenu = tk.Menu(menuBar,tearoff=0)
-menuBar.add_cascade(label = '开始/停止',menu = startendmenu)
-startendmenu.add_cascade(label = '开始',command = start)
+menuBar.add_cascade(label = '开始/停止/暂停',menu = startendmenu)
+startendmenu.add_cascade(label = '开始',command = before_start)
 startendmenu.add_cascade(label = '停止',command = end)
+startendmenu.add_cascade(label = '暂停',command = pause)
 '选择音乐'
 musicmenu = tk.Menu(menuBar,tearoff=0)
 menuBar.add_cascade(label = '选择音乐',menu = musicmenu)
 musicmenu.add_cascade(label = '上课铃声',command = Audio.beginAudio)
 musicmenu.add_cascade(label = '下课铃声',command = Audio.overAudio)
-#开始按钮
-startButton = tk.Button(root,text = '开始', width = 10, height = 2, command = start).place(x=725, y=0, anchor='nw')
 #显示当前时间
 clock_label = tk.Label(root)
 clock_label.pack()
@@ -278,6 +313,5 @@ showBeginTime.config(yscrollcommand=scroll.set)
 '确认按钮'
 BeginTimeButton = tk.Button(root, text = '确认',width = 10,height = 2,command = getBeginTime)
 BeginTimeButton.pack()
-#主程序
 root.mainloop()
 
