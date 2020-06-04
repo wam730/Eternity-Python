@@ -386,4 +386,3 @@ if x == '':
 if y == '':
     tk.messagebox.showwarning(title = '未设置时间', message = '你似乎还未设置下课响铃时间！')
 root.mainloop()
-

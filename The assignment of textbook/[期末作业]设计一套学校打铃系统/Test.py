@@ -20,23 +20,19 @@ tk.Entry(main_box, textvariable = path).grid(row = 0, column = 1)
 tk.Button(main_box, text = "路径选择", command = selectPath).grid(row = 0, column = 2)
 print(selectPath())
 main_box.mainloop()'''
-import tkinter as tk
-from tkinter import filedialog
+import tkinter as tk 
 
-'''打开选择文件夹对话框'''
+root = tk.Tk()
 
-'''root = tk.Tk()
-root.withdraw()
+# sticky='w'，实现两个标签文本左对齐
+tk.Label(root, text='用户名').grid(row=0, column=0, padx=10, pady=5, sticky='w')
+tk.Label(root, text='密码').grid(row=1, column=0, padx=10, pady=5, sticky='w')
 
-Folderpath = filedialog.askdirectory() #获得选择好的文件夹
-Filepath = filedialog.askopenfilename() #获得选择好的文件
+tk.Entry(root).grid(row=0, column=1, padx=10, pady=5)
+tk.Entry(root, show='*').grid(row=1, column=1, padx=10, pady=5)
 
-print('Folderpath:',Folderpath)
-print('Filepath:',Filepath)'''
-with open(r'D:/Python/file.txt', 'r',encoding='UTF-8') as f:
-    n = f.read()
+# 登录按钮跨越三列
+tk.Button(text='登录', width=10).grid(row=2, columnspan=3, padx=5, pady=5)
 
-if n == '':
-    print('1')
-else:
-    print('2')
+tk.mainloop()
+
