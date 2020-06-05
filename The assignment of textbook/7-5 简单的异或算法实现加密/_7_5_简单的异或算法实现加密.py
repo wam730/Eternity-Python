@@ -1,4 +1,4 @@
-'''import tkinter as tk
+import tkinter as tk
 import tkinter.messagebox
 global mw,key
 #------------------------------------------------------------------------
@@ -82,37 +82,4 @@ b3.pack()
 t3=tk.Text(window,height=3,font=0.5)
 t3.pack()
 #------------------------------------------------------------------------
-window.mainloop()'''
-
-'''import tkinter as tk
-import time
-
-# 更新时间,每一秒调用一次
-def update_time():
-    clock_label.configure(text=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime()))
-    clock_label.after(1000,update_time)
-
-root = tk.Tk()
-root.geometry('300x200')
-clock_label = tk.Label(root)
-clock_label.pack()
-update_time()
-root.mainloop()'''
-
-import pygame
-import time
-import datetime
-
-pygame.mixer.init()
-pygame.mixer.music.load(r'D:\source\Eternity-Python\The assignment of textbook\[期末作业]设计一套学校打铃系统\1.mp3')
-
-hm = ['17:16','17:17','17:18']
-
-while True:
-    time.sleep(1)
-    now_h = datetime.datetime.now().strftime('%H')
-    now_m = datetime.datetime.now().strftime('%M')
-    now_hm = now_h + ':' + now_m
-    if now_hm in hm:
-        pygame.mixer.music.play()
-        time.sleep(60)
+window.mainloop()
