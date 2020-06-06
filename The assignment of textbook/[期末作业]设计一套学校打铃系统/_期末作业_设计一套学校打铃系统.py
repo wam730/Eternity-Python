@@ -147,8 +147,14 @@ def before_start():
     if x =='' and y =='':
         tk.messagebox.showerror(title = '时间不正确', message = '你还未设置响铃时间\n请在下方输入框中输入时间\n设置完成后请在“开始/停止/暂停”中点击“开始”')
     elif JudgeTime(x) and JudgeTime(y):
-        showTime.insert('end','开始工作\n上课铃响铃时间为：{0}\n下课铃响铃时间为：{1}\n'.format(x,y))
-        start()
+        global st
+        st +=1
+        print(st)
+        if st == 1:
+            showTime.insert('end','开始工作\n上课铃响铃时间为：{0}\n下课铃响铃时间为：{1}\n'.format(x,y))
+            start()
+        else:
+            tk.messagebox.showerror(title = '错误', message = '请不要重复点击“开始”')
     else:
         tk.messagebox.showwarning(title = '时间不正确', message = '你可能还未设置响铃时间\n请在下方输入框中输入时间\n设置完成后请在“开始/停止/暂停”中点击“开始”')
 #响铃函数，使程序在规定时间响铃
@@ -165,7 +171,7 @@ def start():
         y = g.read()
     x = x.split()
     y = y.split()
-    print('现在是（测试）',H+':'+M+':'+S)
+    #print('现在是（测试）',H+':'+M+':'+S)
     if H+':'+M+':'+S in x:
         print("Work")
         Audio.classbeginAudio()
@@ -176,6 +182,8 @@ def start():
 def end():
     x = tkinter.messagebox.askquestion('提示', '确认退出吗？')
     if x == 'yes':
+        global st
+        st = 0
         root.destroy()
         os._exit(0)
         print('Stop')
@@ -191,6 +199,9 @@ def pause():
         except:
             tk.messagebox.showerror(title = '程序未运行',message = '程序似乎还没有开始运行')
         else:
+            global st
+            st = 0
+            print(st)
             print('Pause')
             myStop.stop_thread(timer)
             tk.messagebox.showinfo(title = '程序已暂停',message = '程序已经暂停运行\n再次点击“开始”以运行程序')
@@ -392,7 +403,8 @@ def howtosetTime():
 4.必须如07：00：00、09：00：30、19：45：40等才是正确形式\n5.时间请以24小时格式输入,用空格分格多个时间\n\
 7.符合格式（xx：xx：xx）的时间可以输入，但超过24小时的不会响铃\n8.如果下方信息框中已经显示有时间，\
 则说明之前已经设置过时间\n9.你可以在输入框中重新输入时间并点击确认来重新设置时间\n\
-10.你可以点击“增加/删除”来增加或删除特定的时间',justify='left',bg='white',font=('微软雅黑',13))
+10.你可以点击“增加/删除时间”来增加或删除特定的时间\n11.特别注意：在输入框中输入时间点击“确认”后\
+会清空以前的时间，如果你要增删时间，请选择“增加/删除时间”',justify='left',bg='white',font=('微软雅黑',13))
     Text.pack()
     window1.mainloop()
 #说明：如何设置音乐函数
@@ -401,7 +413,8 @@ def howtosetAudio():
     window2.iconbitmap("心.ico")
     window2.title('如何设置上下课铃声的音乐')
     Text = tk.Label(window2,text = '1.点击菜单栏中的选择音乐进行音乐设置\n2.程序没有默认设置上下课铃声的音乐，第一次使用请记得设置\n\
-3.你还可以修改程序目录下的“1.txt”、“2.txt”来修改音乐，请选择音乐所在路径',font=('微软雅黑',15),justify='left')
+3.你还可以修改程序目录下的“1.txt”、“2.txt”来修改音乐，请选择音乐所在路径\n4.请注意：在选择音乐时，如果你中途退出选择框\
+或者选择错误时，选择框会反复弹出，直至你做出正确的选择',font=('微软雅黑',15),justify='left')
     Text.pack()
     window2.mainloop()
 #说明：如何使用函数
@@ -410,7 +423,7 @@ def howtouse():
     window3.iconbitmap("心.ico")
     window3.title('如何使用程序')
     Text = tk.Label(window3,text = '使用步骤\n1、设置上下课响铃时间\n2、设置上下课响铃音乐\n3、点击“确认”按钮\n4、设置完毕后在菜单栏的“开始/停止/暂停”中\
-选择“开始”\n5、严格遵循响铃设置，开始自律的（网课）生活吧！',font=('微软雅黑',15),justify='left')
+选择“开始”\n5、严格遵循响铃设置，开始自律的（网课）生活吧！\nPS：请仔细阅读“使用说明”中其他选项',font=('微软雅黑',15),justify='left')
     Text.pack()
     window3.mainloop()
 #说明：关于作者函数
@@ -418,7 +431,7 @@ def aboutAuthor():
     window4 = tk.Tk()
     window4.iconbitmap("心.ico")
     window4.title('作者与设计初衷')
-    Text = tk.Label(window4,text = '作者：王钰杰，中央民族大学理学院信息与计算科学2班，学号：19040041\n\
+    Text = tk.Label(window4,text = '作者：王*杰，******************，学号：19******\n\
 设计初衷：疫情期间上网课，在这个充满诱惑的世界里我们总是很难静下心来学习，\
 在学校有来自同学的压力或许还好,\n\
 但是身处家中，无法通过他人评估自己的学习状态，\
@@ -441,6 +454,7 @@ root.title('自动上下课打铃系统')
 root.geometry('800x600')
 root.resizable(width=False, height=False)
 root.iconbitmap("喇叭.ico")
+st = 0
 #菜单栏
 menuBar = tk.Menu(root)
 '使用说明'
