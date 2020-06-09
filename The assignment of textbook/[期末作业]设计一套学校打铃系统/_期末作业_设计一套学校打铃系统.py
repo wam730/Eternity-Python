@@ -497,96 +497,144 @@ def howtoSave():
 
 #保存到方案1
 def saveProgramme1():
-    with open('Begin.txt','r+') as a:
-        x = a.read()
-        with open('Over.txt','r+') as b:
-            y = b.read()
-            with open('方案1.txt','w+') as c:
-                x = x.split()
-                y = y.split()
-                for i in x:
-                    c.writelines(' '+i)
-                c.write('\n')
-                for j in y:
-                    c.writelines(' '+j)
-    with open('1.txt','r') as q:
-        e = q.read()
-        with open('方案1Begin.txt','w+') as b1:
-            b1.writelines(e)
-    with open('2.txt','r') as w:
-        r = w.read()
-        with open('方案1Over.txt','w+') as o1:
-            o1.writelines(r)
-    tk.messagebox.showinfo(title = '保存到方案1', message = '成功将当前数据保存到了方案1')
+    wh = tk.messagebox.askquestion("提示",'你确认要将消息框中时间写入到方案1吗?')
+    if wh == 'yes':
+        with open('Begin.txt','r+') as a:
+          x = a.read()
+          with open('Over.txt','r+') as b:
+              y = b.read()
+              with open('方案1.txt','w+') as c:
+                  x = x.split()
+                  y = y.split()
+                  for i in x:
+                      c.writelines(' '+i)
+                  c.write('\n')
+                  for j in y:
+                      c.writelines(' '+j)
+        with open('1.txt','r') as q:
+            e = q.read()
+            with open('方案1Begin.txt','w+') as b1:
+                b1.writelines(e)
+        with open('2.txt','r') as w:
+            r = w.read()
+            with open('方案1Over.txt','w+') as o1:
+                o1.writelines(r)
+        tk.messagebox.showinfo(title = '保存到方案1', message = '成功将当前数据保存到了方案1')
+    else:
+        tk.messagebox.showinfo('取消','已取消操作!')
 
 #打开方案1
 def Programme1():
-    with open('方案1.txt','r+') as c:
-        x = c.readlines()
-        print(x)
-        with open('Begin.txt','w+') as a:
-            a.write(x[0])
-            with open('Over.txt','w+') as b:
-                b.write(x[1])
-    with open('方案1Begin.txt','r') as b1:
-        g = b1.readline()
-        print(g)
-        with open('方案1Over.txt','r') as o1:
-            h = o1.readline()
-            print(h)
-            with open('1.txt','w+') as d:
-                d.write(g)
-                with open('2.txt','w+') as e:
-                    e.write(h)
-    update()
-    tk.messagebox.showinfo(title = '打开方案1', message = '成功导入了方案1\n程序将按照方案1执行')
+    wh = tk.messagebox.askquestion("提示",'你确认要导入方案1作为响铃数据吗?')
+    if wh == 'yes':
+        with open('方案1.txt','r+') as c:
+            x = c.readlines()
+            print(x)
+            with open('Begin.txt','w+') as a:
+                a.write(x[0])
+                with open('Over.txt','w+') as b:
+                    b.write(x[1])
+        with open('方案1Begin.txt','r') as b1:
+            g = b1.readline()
+            print(g)
+            with open('方案1Over.txt','r') as o1:
+                h = o1.readline()
+                print(h)
+                with open('1.txt','w+') as d:
+                    d.write(g)
+                    with open('2.txt','w+') as e:
+                        e.write(h)
+        update()
+        tk.messagebox.showinfo(title = '打开方案1', message = '成功导入了方案1\n程序将按照方案1执行')
+    else:
+        tk.messagebox.showinfo('取消','已取消操作!')
 
 #保存到方案2
 def saveProgramme2():
-    with open('Begin.txt','r+') as a:
-        x = a.read()
-        with open('Over.txt','r+') as b:
-            y = b.read()
-            with open('方案2.txt','w+') as c:
-                x = x.split()
-                y = y.split()
-                for i in x:
-                    c.writelines(' '+i)
-                c.write('\n')
-                for j in y:
-                    c.writelines(' '+j)
-    with open('1.txt','r') as q:
-        e = q.read()
-        with open('方案2Begin.txt','w+') as b2:
-            b2.writelines(e)
-    with open('2.txt','r') as w:
-        r = w.read()
-        with open('方案2Over.txt','w+') as o2:
-            o2.writelines(r)
-    update()
-    tk.messagebox.showinfo(title = '保存到方案2', message = '成功将当前数据保存到了方案2')
+    wh = tk.messagebox.askquestion("提示",'你确认要将消息框中时间写入到方案2吗?')
+    if wh == 'yes':
+        with open('Begin.txt','r+') as a:
+            x = a.read()
+            with open('Over.txt','r+') as b:
+                y = b.read()
+                with open('方案2.txt','w+') as c:
+                    x = x.split()
+                    y = y.split()
+                    for i in x:
+                        c.writelines(' '+i)
+                    c.write('\n')
+                    for j in y:
+                        c.writelines(' '+j)
+        with open('1.txt','r') as q:
+            e = q.read()
+            with open('方案2Begin.txt','w+') as b2:
+                b2.writelines(e)
+        with open('2.txt','r') as w:
+            r = w.read()
+            with open('方案2Over.txt','w+') as o2:
+                o2.writelines(r)
+        update()
+        tk.messagebox.showinfo(title = '保存到方案2', message = '成功将当前数据保存到了方案2')
+    else:
+        tk.messagebox.showinfo('取消','已取消操作!')
 
 #打开方案2
 def Programme2():
+    wh = tk.messagebox.askquestion("提示",'你确认要导入方案1作为响铃数据吗?')
+    if wh == 'yes':
+        with open('方案2.txt','r+') as c:
+            x = c.readlines()
+            print(x)
+            with open('Begin.txt','w+') as a:
+                a.write(x[0])
+                with open('Over.txt','w+') as b:
+                    b.write(x[1])
+        with open('方案2Begin.txt','r') as b2:
+            g = b2.readline()
+            print(g)
+            with open('方案2Over.txt','r') as o2:
+                h = o2.readline()
+                print(h)
+                with open('1.txt','w+') as d:
+                    d.write(g)
+                    with open('2.txt','w+') as e:
+                        e.write(h)
+        update()
+        tk.messagebox.showinfo(title = '打开方案2', message = '成功导入了方案2\n程序将按照方案2执行')
+    else:
+        tk.messagebox.showinfo('取消','已取消操作!')
+
+#展示方案1数据
+def showPlan1():
+    window6 = tk.Tk()
+    window6.iconbitmap("心.ico")
+    window6.title('方案1具体数据')
+    sh = tk.Text(window6,font=('微软雅黑',11))
+    with open('方案1.txt','r+') as c:
+            x = c.readlines()
+            with open('方案1Begin.txt','r') as a:
+                y= a.readline()
+                with open('方案1Over.txt','r') as b:
+                    z = b.readline()
+                    sh.insert('end','上课时间:{0}下课时间:{1}\n上课铃音乐路径:{2}\n下课铃音乐路径:{3}'.format(x[0],x[1],y,z))
+    sh.pack()
+    window6.mainloop()
+
+#展示方案2数据
+def showPlan2():
+    window7 = tk.Tk()
+    window7.iconbitmap("心.ico")
+    window7.title('方案2具体数据')
+    sh = tk.Text(window7,font=('微软雅黑',11))
     with open('方案2.txt','r+') as c:
-        x = c.readlines()
-        print(x)
-        with open('Begin.txt','w+') as a:
-            a.write(x[0])
-            with open('Over.txt','w+') as b:
-                b.write(x[1])
-    with open('方案2Begin.txt','r') as b2:
-        g = b2.readline()
-        print(g)
-        with open('方案2Over.txt','r') as o2:
-            h = o2.readline()
-            print(h)
-            with open('1.txt','w+') as d:
-                d.write(g)
-                with open('2.txt','w+') as e:
-                    e.write(h)
-    update()
-    tk.messagebox.showinfo(title = '打开方案2', message = '成功导入了方案2\n程序将按照方案2执行')
+            x = c.readlines()
+            with open('方案2Begin.txt','r') as a:
+                y= a.readline()
+                with open('方案2Over.txt','r') as b:
+                    z = b.readline()
+                    sh.insert('end','上课时间:{0}下课时间:{1}\n上课铃音乐路径:{2}\n下课铃音乐路径:{3}'.format(x[0],x[1],y,z))
+    sh.pack()
+    window7.mainloop()
 
 #-------------------------------------------------------------------主程序---------------------------------------------------------------------------------
 root = tk.Tk()
@@ -613,10 +661,12 @@ aboutmenu.add_command(label = '作者与设计初衷',command = aboutAuthor)
 '方案选择'
 selectmenu = tk.Menu(menuBar,tearoff=0)
 menuBar.add_cascade(label = '方案选择与保存',menu = selectmenu)
-selectmenu.add_cascade(label = '方案1',command = Programme1)
-selectmenu.add_cascade(label = '方案2',command = Programme2)
+selectmenu.add_cascade(label = '导出方案1到当前',command = Programme1)
+selectmenu.add_cascade(label = '导出方案2到当前',command = Programme2)
 selectmenu.add_cascade(label = '保存当前到方案1',command = saveProgramme1)
 selectmenu.add_cascade(label = '保存当前到方案2',command = saveProgramme2)
+selectmenu.add_cascade(label = '查看方案1数据',command = showPlan1)
+selectmenu.add_cascade(label = '查看方案2数据',command = showPlan2)
 selectmenu.add_cascade(label = '如何选择与保存方案',command = howtoSave)
 '开始/停止'
 startendmenu = tk.Menu(menuBar,tearoff=0)
@@ -666,6 +716,7 @@ BeginTimeButton = tk.Button(root, text = '确认',width = 10,height = 1,command 
 
 #下课铃确认按钮
 OverTimeButton = tk.Button(root, text = '确认',width = 10,height = 1,command = getoverTime,font=('微软雅黑',10)).place(x=700,y=52)
+
 #刷新消息框按钮
 updateButton = tk.Button(root, text = '刷新时间',width = 10,height = 1,command = update,font=('微软雅黑',10))#.place(x=700,y=52)
 updateButton.pack()
