@@ -17,6 +17,7 @@ import threading
 import myStop
 from mutagen.mp3 import MP3 
 from tkinter import filedialog
+import PIL
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 #播放音乐与选择音乐的Audio类，不实例化该类
 class Audio():
