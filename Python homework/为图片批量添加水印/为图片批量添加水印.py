@@ -2,7 +2,7 @@ from random import randint
 from os  import listdir
 from PIL import Image
 
-im = Image.open('水印.png')
+im = Image.open(r'水印.png')
 width, height = im.size
 pixels = dict()
 for w in range(width):
@@ -13,7 +13,7 @@ for w in range(width):
 
 def addWaterMark(srcDir):
     picFiles = [srcDir + '\\' + fn for fn in listdir(srcDir)
-                if fn.endswith(('.jpg','.png','.bmp','.jpeg'))]
+                if fn.endswith(('.jpg','.png','.bmp'))]
     for fn in picFiles:
         iml = Image.open(fn)
         w, h = iml.size
@@ -30,6 +30,6 @@ def addWaterMark(srcDir):
             except:
                 iml.putpixel((p[0] + left, p[1] + top),
                              sum(c)//len(c))
-        iml.save(fn[:-4] + '_new.' + fn[-4:])
+        iml.save(fn[:-4] + '_new' + fn[-4:])
 
-addWaterMark('.')
+addWaterMark(r'E:\Onedrive\文档\source\Eternity-Python\Python homework\为图片批量添加水印')
