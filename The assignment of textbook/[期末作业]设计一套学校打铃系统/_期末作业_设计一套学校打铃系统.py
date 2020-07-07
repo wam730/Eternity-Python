@@ -1,10 +1,3 @@
-'''
-需要解决的问题：
-1、如何获取系统时间并匹配用户输入的时间，在设置时间内响铃；
-2、如何绘制一套GUI使得用户便于输入设置时间（包括音乐文件路径）；
-3、如何对音乐进行调节（音量大小、播放时长）；
-4、如何保存用户设置为一套方案，便于用户调用。
-'''
 from pygame import mixer
 from time import strftime,sleep,localtime
 import datetime
