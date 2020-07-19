@@ -3,6 +3,7 @@ import tkinter.messagebox
 import tkinter as tk
 import threading
 import myStop
+import os
 from pygame import mixer
 from time import strftime,sleep,localtime
 from os import _exit
