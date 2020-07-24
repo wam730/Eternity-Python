@@ -43,7 +43,7 @@ window = tk.Tk()
 window.title('异或算法实现文字加密')
 window.geometry('800x800')
 #------------------------------------------------------------------------
-text1=tk.Label(window,text='请在下方输入框中输入你想要加密的明文',
+text1=tk.Label(window,text='请在下方输入框中输入你想要加(解)密的明文',
                  bg='white',width=110,height=5,font=15)
 text1.pack()
 
@@ -57,7 +57,7 @@ b1.pack()
 t1=tk.Text(window,height=3,font=0.5)
 t1.pack()
 #------------------------------------------------------------------------
-text2=tk.Label(window,text='请在下方输入框中输入加密的密钥',
+text2=tk.Label(window,text='请在下方输入框中输入加(解)密的密钥',
                  bg='white',width=110,height=5,font=15)
 text2.pack()
 
@@ -71,11 +71,11 @@ b2.pack()
 t2=tk.Text(window,height=3,font=0.5)
 t2.pack()
 #------------------------------------------------------------------------
-text3=tk.Label(window,text='加密后的密文是',
+text3=tk.Label(window,text='加(解)密后的文字是',
                  bg='white',width=110,height=5,font=15)
 text3.pack()
 
-b3=tk.Button(window, text='展示密文', width=10,
+b3=tk.Button(window, text='展示文字', width=10,
                height=2,command=showmiwen)
 b3.pack()
 
