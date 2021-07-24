@@ -419,7 +419,7 @@ def JudgeTime(data):
 
 #更新系统时间显示函数
 def update_time():
-    clock_label.configure(text=strftime('现在是：%Y-%m-%d %H:%M:%S',localtime()))
+    clock_label.configure(text=strftime('现在是当地时间：%Y-%m-%d %H:%M:%S',localtime()))
     clock_label.after(500,update_time)
 
 #所有的使用说明---------------------------------------------------------------------------------------------------------------------------------------------
